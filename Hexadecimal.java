@@ -1,10 +1,11 @@
 /* Team Tofoo - Zicheng Zhen and Gabriel Marks
    APCS1 pd10
-   HW43 -- This or That / Binary Class
+   HW43 -- This or That / Hexadecimal Class
    2015-12-08 */
 
-public class Binary {
+public class Hexadecimal {
 
+    private final static String HEXDIGITS = "0123456789ABCDEF";
     private int _decNum;
     private String _binNum;
 
@@ -13,7 +14,7 @@ public class Binary {
       pre:  n/a
       post: initializes _decNum to 0, _binNum to "0"
       =====================================*/
-    public Binary() { 
+    public Hexadecimal() { 
 	_decNum = 0;
 	_binNum = "0";
     }
@@ -24,7 +25,7 @@ public class Binary {
       pre:  n >= 0
       post: sets _decNum to n, _binNum to equiv string of bits
       =====================================*/
-    public Binary( int n ) {
+    public Hexadecimal( int n ) {
 	this();
 	_decNum = n;
 	_binNum = decToBin(n);
@@ -36,7 +37,7 @@ public class Binary {
       pre:  s is String representing non-negative binary number
       post: sets _binNum to input, _decNum to decimal equiv
       =====================================*/
-    public Binary( String s ) {
+    public Hexadecimal( String s ) {
 	this();
 	int num = Integer.parseInt(s);
 	_decNum = num;
@@ -59,7 +60,34 @@ public class Binary {
 	return _binNum;
     }
 
+    /*=====================================
+      String chooseHex(int) - returns hexadec representation from 0 - 15
+      pre: 0 <= n < 16
+      post: returns String from 0 - 9, a - f 
+      =====================================*/
+    public String chooseHex(int n) {
+	try {
+	    return HEXDIGITS.substring(n,n+1);
+	} catch (Exception ex) {
+	    System.out.println("ERROR: Index out of range.");
+	    return "";
+	}
+    }
 
+    /*=====================================
+      String chooseDec(String) - returns hexadec representation from 0 - 15
+      pre: "0" <= n < "f"
+      post: returns int from 0 to 15
+      =====================================*/
+    public int chooseDec(String s) {
+	try {
+	    return HEXDIGITS.indexOf(s);
+	} catch (Exception ex) {
+	    System.out.println("ERROR: Index out of range.");
+	    return -1;
+	}
+    }
+	
     /*=====================================
       String decToBin(int) -- converts base-10 input to binary
       pre:  n >= 0
@@ -145,14 +173,14 @@ public class Binary {
 
     /*=============================================
       boolean equals(Object) -- tells whether 2 Objs are equivalent
-      pre:  other is an instance of class Binary
+      pre:  other is an instance of class Hexadecimal
       post: Returns true if this and other are aliases (pointers to same 
       Object), or if this and other represent equal binary values
       =============================================*/
     public boolean equals( Object other ) { 
 	boolean retVal = this == other;
 	if (!(retVal)) {
-	    retVal = other instanceof Binary;
+	    retVal = other instanceof Hexadecimal;
 	    if (retVal) {
 		return (this.compareTo(other) == 0);
 	    }
@@ -163,18 +191,18 @@ public class Binary {
 
 
     /*=============================================
-      int compareTo(Object) -- tells which of two Binary objects is greater
-      pre:  other is instance of class Binary
+      int compareTo(Object) -- tells which of two Hexadecimal objects is greater
+      pre:  other is instance of class Hexadecimal
       post: Returns 0 if this Object is equal to the input Object,
       negative integer if this<input, positive integer otherwise
       =============================================*/
     public int compareTo( Object other ) {
-	if (!(other instanceof Binary)) {
+	if (!(other instanceof Hexadecimal)) {
 	    return -1;
 	}
-	if (_decNum > ((Binary)other).getValue()) {
+	if (_decNum > ((Hexadecimal)other).getValue()) {
 	    return 1;
-	} else if (_decNum < ((Binary)other).getValue()) {
+	} else if (_decNum < ((Hexadecimal)other).getValue()) {
 	    return -1;
 	} else {
 	    return 0;
@@ -189,10 +217,10 @@ public class Binary {
 	System.out.println();
 	System.out.println( "Testing ..." );
 
-	Binary b1 = new Binary(5);
-	Binary b2 = new Binary("5");
-	Binary b3 = b1;
-	Binary b4 = new Binary(7);
+	Hexadecimal b1 = new Hexadecimal(5);
+	Hexadecimal b2 = new Hexadecimal("5");
+	Hexadecimal b3 = b1;
+	Hexadecimal b4 = new Hexadecimal(7);
 
 	System.out.println( b1 );
 	System.out.println( b2 );
