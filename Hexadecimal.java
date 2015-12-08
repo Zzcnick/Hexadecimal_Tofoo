@@ -39,9 +39,8 @@ public class Hexadecimal {
       =====================================*/
     public Hexadecimal( String s ) {
 	this();
-	int num = Integer.parseInt(s);
-	_decNum = num;
-	_hexNum = decToHex(Num);
+	_decNum = hexToDec(s);
+	_hexNum = s;
     }
 
     /*=====================================
@@ -65,7 +64,7 @@ public class Hexadecimal {
       pre: 0 <= n < 16
       post: returns String from 0 - 9, a - f 
       =====================================*/
-    public String chooseHex(int n) {
+    public static String chooseHex(int n) {
 	try {
 	    return HEXDIGITS.substring(n,n+1);
 	} catch (Exception ex) {
@@ -79,7 +78,7 @@ public class Hexadecimal {
       pre: "0" <= n < "f"
       post: returns int from 0 to 15
       =====================================*/
-    public int chooseDec(String s) {
+    public static int chooseDec(String s) {
 	try {
 	    return HEXDIGITS.indexOf(s);
 	} catch (Exception ex) {
@@ -198,8 +197,7 @@ public class Hexadecimal {
       =============================================*/
     public int compareTo( Object other ) {
 	if (!(other instanceof Hexadecimal)) {
-	    return -1;
-	    throw new ClassCastException();
+	    throw new ClassCastException("Incorrect type of parameter");
 	}
 	if (_decNum > ((Hexadecimal)other).getValue()) {
 	    return 1;
@@ -222,11 +220,16 @@ public class Hexadecimal {
 	Hexadecimal b2 = new Hexadecimal("5");
 	Hexadecimal b3 = b1;
 	Hexadecimal b4 = new Hexadecimal(7);
-
+	Hexadecimal b5 = new Hexadecimal(266);
+	Hexadecimal b6 = new Hexadecimal("10A");
+	String s = "hallo";
+	
 	System.out.println( b1 );
 	System.out.println( b2 );
 	System.out.println( b3 );       
-	System.out.println( b4 );       
+	System.out.println( b4 );
+	System.out.println( b5 );
+	System.out.println( b6 );
 
 	System.out.println( "\n==..." );
 	System.out.println( b1 == b2 ); //should be false
@@ -238,12 +241,19 @@ public class Hexadecimal {
 	System.out.println( b3.equals(b1) ); //should be true
 	System.out.println( b4.equals(b2) ); //should be false
 	System.out.println( b1.equals(b4) ); //should be false
+	System.out.println( b6.equals(b5) ); //should be true
+	System.out.println( b6.equals(s)  ); //should be false
 
 	System.out.println( "\n.compareTo..." );
 	System.out.println( b1.compareTo(b2) ); //should be 0
 	System.out.println( b1.compareTo(b3) ); //should be 0
 	System.out.println( b1.compareTo(b4) ); //should be neg
 	System.out.println( b4.compareTo(b1) ); //should be pos
+	try {
+	System.out.println( b5.compareTo(s)  ); //should throw ClassCastException
+	} catch (Exception e) {
+	    System.out.println(e);
+	}
 	/*=========================================
 	  =========================================*/
     }//end main()
