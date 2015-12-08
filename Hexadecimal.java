@@ -1,6 +1,6 @@
 /* Team Tofoo - Zicheng Zhen and Gabriel Marks
    APCS1 pd10
-   HW44 -- This or That or Fourteen Other Things/ Hexadecimal Class
+   HW44 -- This or That or Fourteen Other Things / Hexadecimal Class
    2015-12-08 */
 
 public class Hexadecimal {
@@ -135,9 +135,9 @@ public class Hexadecimal {
       eg  
       hexToDec("0") -> 0
       hexToDec("1") -> 1
-      hexToDec("10") -> 2
-      hexToDec("11") -> 3
-      hexToDec("1110") -> 14
+      hexToDec("10") -> 16
+      hexToDec("11") -> 17
+      hexToDec("AD") -> 173
       =====================================*/
     public static int hexToDec( String s ) {
 	int total = 0;
@@ -149,7 +149,6 @@ public class Hexadecimal {
 	return total;
     }
 
-
     /*=====================================
       String hexToDecR(String) -- converts base-10 input to hexadecimal, recursively
       pre:  s represents non-negative hexadecimal number
@@ -157,9 +156,8 @@ public class Hexadecimal {
       eg  
       hexToDecR("0") -> 0
       hexToDecR("1") -> 1
-      hexToDecR("10") -> 2
-      hexToDecR("11") -> 3
-      hexToDecR("1110") -> 14
+      hexToDecR("10") -> 16
+      hexToDecR("11") -> 17
       =====================================*/
     public static int hexToDecR( String s ) { 
 	if (s.length() == 1) {
@@ -208,11 +206,8 @@ public class Hexadecimal {
 	}
     }
 
-
     //main method for testing
     public static void main( String[] args ) {
-
-
 	System.out.println();
 	System.out.println( "Testing ..." );
 
@@ -230,6 +225,16 @@ public class Hexadecimal {
 	System.out.println( b4 );
 	System.out.println( b5 );
 	System.out.println( b6 );
+
+	System.out.println( "\nhexToDec" );
+	System.out.println(Hexadecimal.hexToDec("100")); //should be 256
+	System.out.println(Hexadecimal.hexToDec("DEF")); //should be 3567
+	System.out.println(Hexadecimal.hexToDec("ABE")); //should be 2750
+	
+	System.out.println( "\ndecToHex" );
+	System.out.println(Hexadecimal.decToHex(256)); //should be "100"
+	System.out.println(Hexadecimal.decToHex(3567)); //should be "3567"
+	System.out.println(Hexadecimal.decToHex(2750)); //should be "2750"
 
 	System.out.println( "\n==..." );
 	System.out.println( b1 == b2 ); //should be false
