@@ -1,6 +1,6 @@
 /* Team Tofoo - Zicheng Zhen and Gabriel Marks
    APCS1 pd10
-   HW43 -- This or That / Hexadecimal Class
+   HW44 -- This or That or Fourteen Other Things/ Hexadecimal Class
    2015-12-08 */
 
 public class Hexadecimal {
