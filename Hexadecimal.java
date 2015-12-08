@@ -170,7 +170,7 @@ public class Binary {
       =============================================*/
     public int compareTo( Object other ) {
 	if (!(other instanceof Hexadecimal)) {
-	    return -1;
+	    throw new ClassCastException();
 	}
 	if (_decNum > ((Hexadecimal)other).getValue()) {
 	    return 1;
