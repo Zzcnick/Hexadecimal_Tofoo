@@ -112,12 +112,12 @@ public class Binary {
       binToDec("11") -> 3
       binToDec("1110") -> 14
       =====================================*/
-    public static int binToDec( String s ) {
+    public static int hexToDec( String s ) {
 	int total = 0;
 	int times = 1;
 	for (int i = s.length()-1; i > -1; i--) {
-	    total += Integer.parseInt(s.substring(i,i+1)) * times;
-	    times *= 2;
+	    total += chooseDec(s.substring(i,i+1)) * times;
+	    times *= 16;
 	}
 	return total;
     }
@@ -134,12 +134,12 @@ public class Binary {
       binToDecR("11") -> 3
       binToDecR("1110") -> 14
       =====================================*/
-    public static int binToDecR( String s ) { 
+    public static int hexToDecR( String s ) { 
 	if (s.length() == 1) {
-	    return Integer.parseInt(s);
+	    return chooseDec(s);
 	}
-	return 2 * binToDecR(s.substring(0,s.length()-1)) +
-	    Integer.parseInt(s.substring(s.length()-1));
+	return 16 * hexToDecR(s.substring(0,s.length()-1)) +
+	    chooseDec(s.substring(s.length()-1));
     }
 
 
