@@ -70,12 +70,12 @@ public class Binary {
       decToBin(3) -> "11"
       decToBin(14) -> "1110"
       =====================================*/
-    public static String decToBin( int n ) {
+    public static String decToHex( int n ) {
 	String binVal = "";
 	while (n != 0) {
-	    int digit = n % 2;
-	    binVal = digit + binVal;
-	    n /= 2;
+	    int digit = n % 16;
+	    binVal = chooseHex(digit) + binVal;
+	    n /= 16;
 	}
 	if (binVal.equals(""))
 	    return "0";
@@ -93,11 +93,11 @@ public class Binary {
       decToBinR(3) -> "11"
       decToBinR(14) -> "1110"
       =====================================*/
-    public static String decToBinR( int n ) {
-	if (n < 2) {
-	    return "" + n;
+    public static String decToHexR( int n ) {
+	if (n < 16) {
+	    return "" + chooseHex(n);
 	}
-	return decToBinR(n/2) + ("" + n%2);
+	return decToBinR(n/16) + ("" + chooseHex(n%16));
     }
 
 
