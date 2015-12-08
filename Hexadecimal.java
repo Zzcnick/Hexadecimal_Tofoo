@@ -98,12 +98,12 @@ public class Hexadecimal {
       decToBin(3) -> "11"
       decToBin(14) -> "1110"
       =====================================*/
-    public static String decToBin( int n ) {
+    public static String decToHex( int n ) {
 	String binVal = "";
 	while (n != 0) {
-	    int digit = n % 2;
-	    binVal = digit + binVal;
-	    n /= 2;
+	    int digit = n % 16;
+	    binVal = chooseHex(digit) + binVal;
+	    n /= 16;
 	}
 	if (binVal.equals(""))
 	    return "0";
@@ -121,11 +121,11 @@ public class Hexadecimal {
       decToBinR(3) -> "11"
       decToBinR(14) -> "1110"
       =====================================*/
-    public static String decToBinR( int n ) {
-	if (n < 2) {
-	    return "" + n;
+    public static String decToHexR( int n ) {
+	if (n < 16) {
+	    return "" + chooseHex(n);
 	}
-	return decToBinR(n/2) + ("" + n%2);
+	return decToBinR(n/16) + ("" + chooseHex(n%16));
     }
 
 
@@ -140,12 +140,12 @@ public class Hexadecimal {
       binToDec("11") -> 3
       binToDec("1110") -> 14
       =====================================*/
-    public static int binToDec( String s ) {
+    public static int hexToDec( String s ) {
 	int total = 0;
 	int times = 1;
 	for (int i = s.length()-1; i > -1; i--) {
-	    total += Integer.parseInt(s.substring(i,i+1)) * times;
-	    times *= 2;
+	    total += chooseDec(s.substring(i,i+1)) * times;
+	    times *= 16;
 	}
 	return total;
     }
@@ -162,12 +162,12 @@ public class Hexadecimal {
       binToDecR("11") -> 3
       binToDecR("1110") -> 14
       =====================================*/
-    public static int binToDecR( String s ) { 
+    public static int hexToDecR( String s ) { 
 	if (s.length() == 1) {
-	    return Integer.parseInt(s);
+	    return chooseDec(s);
 	}
-	return 2 * binToDecR(s.substring(0,s.length()-1)) +
-	    Integer.parseInt(s.substring(s.length()-1));
+	return 16 * hexToDecR(s.substring(0,s.length()-1)) +
+	    chooseDec(s.substring(s.length()-1));
     }
 
 
@@ -199,6 +199,7 @@ public class Hexadecimal {
     public int compareTo( Object other ) {
 	if (!(other instanceof Hexadecimal)) {
 	    return -1;
+	    throw new ClassCastException();
 	}
 	if (_decNum > ((Hexadecimal)other).getValue()) {
 	    return 1;
